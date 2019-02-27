@@ -62,6 +62,7 @@ if(NOT CMAKE_SYSTEM_PROCESSOR STREQUAL "aarch64")
     if(OPTIONAL_ASAN_LD_PRELOAD_OVERRIDE)
       execute_process(COMMAND bash "-c" "ldconfig -p | grep -e "libasan.*x86_64" | awk '{print $NF}'"
       OUTPUT_VARIABLE libasan_path OUTPUT_STRIP_TRAILING_WHITESPACE)
+      set(libasan_path "/usr/lib/x86_64-linux-gnu/libasan.so.4")
       list(APPEND memory_tools_extra_test_env
         LD_PRELOAD=${libasan_path}:${memory_tools_path})
     else()
